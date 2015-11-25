@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>File Handling Cheat Sheet in Python</title>
+        <link rel="profile" href="http://gmpg.org/xfn/11" />
+        <link rel="canonical" href="http://www.pythonforbeginners.com/" />        
+        <meta property="og:locale" content="en_US"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="File Handling Cheat Sheet in Python"/>
+        <meta property="og:url" content="http://www.pythonforbeginners.com/systems-programming/python-file-handling/"/>
+        <meta property="og:site_name" content="Python For Beginners"/>        
+        <link rel="alternate" type="application/rss+xml" title="Python For Beginners &raquo; Feed" href="http://www.pythonforbeginners.com/feed/" />
+        <link rel="alternate" type="application/rss+xml" title="Python For Beginners &raquo; Comments Feed" href="http://www.pythonforbeginners.com/comments/feed/" />        
+        <meta name="description" lang="en-US" content=" File Handling File handling in Python requires no importing of modules. File Object Instead we can use the built-in object ... " />
+        <meta name="keywords" content="" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="http://s.pythonforbeginners.com/static/img/favicon.ico" type="image/x-icon" />
+        <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.min.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shThemeDefault.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="http://s.pythonforbeginners.com/static/css/p4b.css" >
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-64708426-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<script type="text/javascript" src="//s.ntv.io/serve/load.js" async></script>
+    </head>
+    <body>
+        <div id="fb-root"></div>
+
+        <div id="wrapper">
+            
+<div class="container navigation">  <div class="navbar navbar-inverse">  
+<script>
+function reloadMe() {
+	window.location.reload();
+}
+function getInterval(){
+	var lowerBound = 420;
+	var upperBound = 840;
+	
+	var randNum = Math.floor((upperBound-lowerBound+1)*Math.random()+lowerBound) * 1000;
+	return randNum;
+}
+var interval = getInterval();
+var srcInterval = setInterval("reloadMe()",interval);
+</script> 
+<script async type="text/javascript" src="//cdn.fancybar.net/ac/fancybar.js?zoneid=1502&serve=C6ADVKE&placement=pythonforbeginners" id="_fancybar_js"></script>
+  
+     <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="glyphicon glyphicon-chevron-down"></span>
+        </button>        
+        <a class="navbar-brand" href="/" title="pythonforbeginners.com">
+          <span class="first-part">python</span> for beginners
+          <!-- <img src="http://s.pythonforbeginners.com/static/img/logo.png" alt="pythonforbeginners.com">-->
+        </a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          
+          <li><a href="/basics/" title="Basics">basics</a></li>
+          <li><a href="/lists/" title="lists">lists</a></li>
+          <li><a href="/dictionary-data-structure-in-python/" title="dictionary">dictionary</a></li>
+          <li><a href="/code-snippets-source-code/" title="code snippets">code snippets</a></li>
+          <li><a href="/modules-in-python/" title="modules">modules</a></li>
+         </ul>          
+      </div>
+  </div>
+<script type='text/javascript'>
+<!--//<![CDATA[
+   document.MAX_ct0 ='';
+   var m3_u = (location.protocol=='https:'?'https://cas.criteo.com/delivery/ajs.php?':'http://cas.criteo.com/delivery/ajs.php?');
+   var m3_r = Math.floor(Math.random()*99999999999);
+   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+   document.write ("zoneid=254422");document.write("&amp;nodis=1");
+   document.write ('&amp;cb=' + m3_r);
+   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+   document.write ("&amp;loc=" + escape(window.location).substring(0,1600));
+   if (document.context) document.write ("&context=" + escape(document.context));
+   if ((typeof(document.MAX_ct0) != 'undefined') && (document.MAX_ct0.substring(0,4) == 'http')) {
+       document.write ("&amp;ct0=" + escape(document.MAX_ct0));
+   }
+   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+   document.write ("'></scr"+"ipt>");
+//]]>--></script>
+
+
+<style>
+#right_bottom_ad {
+	position: fixed;
+	right: -325px;
+	bottom: 0;
+z-index: 1000;
+	width: 320px;
+	height: 270px;
+	
+	transition: all 0.5s;
+	-webkit-transition: all 0.8s;
+	-moz-transition: all 0.8s;
+	-o-transition: all 0.8s;
+}
+#right_bottom_ad.slide-in {
+	right: 0 !important;
+}
+#right_bottom_ad_close_box {
+	position: absolute;
+	top: 0px;
+	right: 15px;
+margin-top: -30px;
+background: #fff;
+padding: 0px 4px;
+}
+</style>
+
+<script>
+window.onload = function() {
+	document.getElementById('right_bottom_ad').setAttribute('class', 'slide-in');
+	
+	document.getElementById('close-button').addEventListener('click', function(event){
+    	event.preventDefault();
+    	document.getElementById('right_bottom_ad').removeAttribute('class', 'slide-in');
+	});
+
+var close = document.getElementById('close-button');
+var counter = 10;
+var newElement = document.getElementById('countdown');
+newElement.innerHTML = 10;
+var id;
+
+close.parentNode.replaceChild(newElement, close);
+
+id = setInterval(function() {
+    counter--;
+    if(counter < 0) {
+        newElement.parentNode.replaceChild(close, newElement);
+        clearInterval(id);
+    } else {
+        newElement.innerHTML = counter.toString();
+    }
+}, 1000);
+
+};
+</script>
+
+<div id="right_bottom_ad">
+<div id="right_bottom_ad_close_box"><div id="countdown">10</div><a href="#" id="close-button">X</a></div>
+<div class="ad_box">
+
+<script type="text/javascript" src="http://ap.lijit.com/www/delivery/fpi.js?z=315227&u=theeighth&width=300&height=250"></script>
+</div>
+</div> 
+
+
+</div>
+            
+
+
+
+
+<script type="text/javascript">
+
+	var disqus_shortname = 'pythonbeginners';
+	var disqus_identifier = "743 http://www.pythonforbeginners.com/?p=743";
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function () {
+		var s = document.createElement('script'); s.async = true;
+		s.type = 'text/javascript';
+		s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+	}());
+</script>
+
+   
+    <div class="container content">
+        <div class="col-md-7 col-lg-8">
+            <div class="post-header">
+                Jan. 02, 2013
+                <ul class="nav nav-pills">
+                
+                    <li><a href="/cheatsheet/" title="Cheatsheet"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Cheatsheet</a></li>
+                
+                    <li><a href="/filehandling/" title="Filehandling"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Filehandling</a></li>
+                
+                    <li><a href="/files/" title="Files"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Files</a></li>
+                
+                    <li><a href="/systems-programming/" title="System &amp; OS"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;System &amp; OS</a></li>
+                
+                </ul>
+            </div>
+            <h1>File Handling Cheat Sheet in Python</h1>
+           
+<!--/*
+  *
+  * Revive Adserver Javascript Tag
+  * - Generated with Revive Adserver v3.1.0
+  *
+  */-->
+
+<!--/*
+  * The backup image section of this tag has been generated for use on a
+  * non-SSL page. If this tag is to be placed on an SSL page, change the
+  *   'http://ads.egrappler.com/www/delivery/...'
+  * to
+  *   'https://ads.egrappler.com/www/delivery/...'
+  *
+  * This noscript section of this tag only shows image banners. There
+  * is no width or height in these banners, so if you want these tags to
+  * allocate space for the ad before it shows, you will need to add this
+  * information to the <img> tag.
+  *
+  * If you do not want to deal with the intricities of the noscript
+  * section, delete the tag (from <noscript>... to </noscript>). On
+  * average, the noscript tag is called from less than 1% of internet
+  * users.
+  */-->
+
+<script type='text/javascript'><!--//<![CDATA[
+   var m3_u = (location.protocol=='https:'?'https://ads.egrappler.com/www/delivery/ajs.php':'http://ads.egrappler.com/www/delivery/ajs.php');
+   var m3_r = Math.floor(Math.random()*99999999999);
+   if (!document.MAX_used) document.MAX_used = ',';
+   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+   document.write ("?zoneid=77");
+   document.write ('&amp;cb=' + m3_r);
+   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+   document.write ("&amp;loc=" + escape(window.location));
+   if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+   if (document.context) document.write ("&context=" + escape(document.context));
+   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+   document.write ("'><\/scr"+"ipt>");
+//]]>--></script><noscript><a href='http://ads.egrappler.com/www/delivery/ck.php?n=af1b78cc&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://ads.egrappler.com/www/delivery/avw.php?zoneid=77&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=af1b78cc' border='0' alt='' /></a></noscript>
+
+
+
+            <div class="post-bodycopy cf">
+                <h2>File Handling</h2>
+<pre>
+File handling in Python requires no importing of modules. 
+</pre>
+
+<h2>File Object</h2>
+<pre>
+Instead we can use the built-in object "file". 
+
+That object provides basic functions and methods necessary to manipulate files
+by default. 
+
+Before you can read, append or write to a file, you will first have to it using
+Python's built-in open() function. 
+
+In this post I will describe how to use the different methods of the file object. 
+</pre>
+
+<h2>Open()</h2>
+<pre>
+The open() function is used to open files in our system, the filename is the
+name of the file to be opened. 
+
+The mode indicates, how the file is going to be opened "r" for reading,
+"w" for writing and "a" for a appending. 
+
+The open function takes two arguments, the name of the file and and the mode
+for which we would like to open the file. 
+
+By default, when only the filename is passed, the open function opens the file
+in read mode.
+</pre>
+
+<h2>Example</h2>
+<pre>
+This small script, will open the (hello.txt) and print the content. 
+
+This will store the file information in the file object "filename".
+</pre>
+
+<pre class="prettyprint">
+filename = "hello.txt"
+file = open(filename, "r")
+for line in file:
+   print line,
+</pre>
+
+<h2>Read ()</h2>
+<pre>
+The read functions contains different methods, read(),readline() and readlines()
+
+read()		#return one big string
+
+readline	#return one line at a time
+
+readlines	#returns a list of lines
+</pre>
+
+<h2>Write ()</h2>
+<pre>
+This method writes a sequence of strings to the file.
+
+write ()	#Used to write a fixed sequence of characters to a file
+
+writelines()	#writelines can write a list of strings.
+</pre>
+
+<h2>Append ()</h2>
+<pre>
+The append function is used to append to the file instead of overwriting it.
+
+To append to an existing file, simply open the file in append mode ("a"):
+</pre>
+
+<h2>Close()</h2>
+<pre>
+When you’re done with a file, use close() to close it and free up any system
+resources taken up by the open file
+</pre>
+
+<h2>File Handling Examples</h2>
+<pre>
+Let's show some examples
+</pre>
+
+<pre>
+<strong>To open a text file, use:
+</strong>fh = open("hello.txt", "r")
+
+<strong>To read a text file, use:
+</strong>fh = open("hello.txt","r")
+print fh.read()
+
+<strong>To read one line at a time, use:
+</strong>fh = open("hello".txt", "r")
+print fh.readline()
+
+<strong>To read a list of lines use:
+</strong>fh = open("hello.txt.", "r")
+print fh.readlines()
+
+<strong>To write to a file, use:
+</strong>fh = open("hello.txt","w")
+write("Hello World")
+fh.close()
+
+<strong>To write to a file, use:
+</strong>fh = open("hello.txt", "w")
+lines_of_text = ["a line of text", "another line of text", "a third line"]
+fh.writelines(lines_of_text)
+fh.close()
+
+<strong>To append to file, use:
+</strong>fh = open("Hello.txt", "a")
+write("Hello World again")
+fh.close
+
+<strong>To close a file, use
+</strong>fh = open("hello.txt", "r")
+print fh.read()
+fh.close()
+</pre>
+
+
+                <div>
+                    <a href="https://twitter.com/share?url=http://www.pythonforbeginners.com/systems-programming/python-file-handling/" class="twitter-share-button" data-via="pythonbeginners" data-size="large">Tweet</a>
+                    <div class="g-plusone" data-href="http://www.pythonforbeginners.com/systems-programming/python-file-handling/" data-size="standard" data-annotation="bubble"></div>
+                    <div class="fb-like" data-href="http://www.pythonforbeginners.com/systems-programming/python-file-handling/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>                        
+                </div><br/><br/>
+
+<div style="text-align: center; padding: 8px;">
+<!--/*
+  *
+  * Revive Adserver Javascript Tag
+  * - Generated with Revive Adserver v3.1.0
+  *
+  */-->
+
+<!--/*
+  * The backup image section of this tag has been generated for use on a
+  * non-SSL page. If this tag is to be placed on an SSL page, change the
+  *   'http://ads.egrappler.com/www/delivery/...'
+  * to
+  *   'https://ads.egrappler.com/www/delivery/...'
+  *
+  * This noscript section of this tag only shows image banners. There
+  * is no width or height in these banners, so if you want these tags to
+  * allocate space for the ad before it shows, you will need to add this
+  * information to the <img> tag.
+  *
+  * If you do not want to deal with the intricities of the noscript
+  * section, delete the tag (from <noscript>... to </noscript>). On
+  * average, the noscript tag is called from less than 1% of internet
+  * users.
+  */-->
+
+<script type='text/javascript'><!--//<![CDATA[
+   var m3_u = (location.protocol=='https:'?'https://ads.egrappler.com/www/delivery/ajs.php':'http://ads.egrappler.com/www/delivery/ajs.php');
+   var m3_r = Math.floor(Math.random()*99999999999);
+   if (!document.MAX_used) document.MAX_used = ',';
+   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+   document.write ("?zoneid=67");
+   document.write ('&amp;cb=' + m3_r);
+   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+   document.write ("&amp;loc=" + escape(window.location));
+   if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+   if (document.context) document.write ("&context=" + escape(document.context));
+   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+   document.write ("'><\/scr"+"ipt>");
+//]]>--></script><noscript><a href='http://ads.egrappler.com/www/delivery/ck.php?n=a66ef10b&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://ads.egrappler.com/www/delivery/avw.php?zoneid=67&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=a66ef10b' border='0' alt='' /></a></noscript>
+
+</div>
+
+                Read more about:
+                <ul class="nav nav-pills">
+                
+                <li><a href="/cheatsheet/" title="Cheatsheet"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Cheatsheet</a></li>
+                
+                <li><a href="/filehandling/" title="Filehandling"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Filehandling</a></li>
+                
+                <li><a href="/files/" title="Files"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Files</a></li>
+                
+                <li><a href="/systems-programming/" title="System &amp; OS"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;System &amp; OS</a></li>
+                
+                </ul>
+            </div>
+        
+            <div id="disqus_thread">
+                <div id="dsq-content">
+                    <ul class="nav" id="dsq-comments">
+                                        
+                        <li class="comment even thread-even depth-1" id="dsq-comment-1196508043">
+                            <div id="dsq-comment-header-1196508043" class="dsq-comment-header">
+                                <cite id="dsq-cite-1196508043">
+                                    <strong><span id="dsq-author-user-1196508043">reader</span></strong> 
+                                    <span>Jan. 11, 2014, 6:55 p.m.</span>
+                                </cite>
+                            </div>
+                            <div id="dsq-comment-body-1196508043" class="dsq-comment-body">
+                                <div id="dsq-comment-message-1196508043" class="dsq-comment-message"><p><p>In the examples <br>write("Hello World")<br>should be </p>
+
+<p>fh.write("Hello World")</p></p>
+                                </div>
+                            </div>
+                        </li>
+                    
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        
+<div class="col-md-5 col-lg-4">
+    <form role="form" id="search" method="get" action="/search/"> 
+      <div class="input-group">
+          <input type="text" placeholder="Search" id="q" name="q" class="form-control">
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-default">SEARCH</button>
+          </span>               
+      </div>
+    </form>
+    <aside>
+<div style="padding: 8px 8px;">
+
+
+<script type="text/javascript" src="http://cssdeck.com/assets/js/advert.js"></script>
+<script type="text/javascript">
+if (document.getElementById("tester") == undefined) 
+{ 
+document.write('<div class="adblock" style="padding: 5px;border: 1px solid #ddd;margin: 10px 5px;"><div style="padding-bottom: 10px;"><span style="font-weight: bold;font-size: 18px;">Essential Core Python Cheat Sheet</span><br> Free eBook in exchange for filling out a short form!</div><a href="http://egrappler.tradepub.com/free/w_dzon15/prgm.cgi?a=1"><img src="http://img.tradepub.com/free/w_dzon15/images/w_dzon15c8.jpg" style="width: 300px; height auto"></a></div>'); 
+}
+ 
+</script> 
+
+
+<!-- BuySellAds Ad Code -->
+<script type="text/javascript">
+(function(){
+  var bsa = document.createElement('script');
+     bsa.type = 'text/javascript';
+     bsa.async = true;
+     bsa.src = '//s3.buysellads.com/ac/bsa.js';
+  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+})();
+</script>
+<!-- End BuySellAds Ad Code -->
+<!-- BuySellAds Zone Code -->
+<div id="bsap_1303531" class="bsarocks bsap_d9686a1e7fd5c4eaea6cc68d37c9bce9"></div>
+<!-- End BuySellAds Zone Code -->
+</div>
+
+
+
+
+<!--/*
+  *
+  * Revive Adserver Javascript Tag
+  * - Generated with Revive Adserver v3.1.0
+  *
+  */-->
+
+<!--/*
+  * The backup image section of this tag has been generated for use on a
+  * non-SSL page. If this tag is to be placed on an SSL page, change the
+  *   'http://ads.egrappler.com/www/delivery/...'
+  * to
+  *   'https://ads.egrappler.com/www/delivery/...'
+  *
+  * This noscript section of this tag only shows image banners. There
+  * is no width or height in these banners, so if you want these tags to
+  * allocate space for the ad before it shows, you will need to add this
+  * information to the <img> tag.
+  *
+  * If you do not want to deal with the intricities of the noscript
+  * section, delete the tag (from <noscript>... to </noscript>). On
+  * average, the noscript tag is called from less than 1% of internet
+  * users.
+  */-->
+
+<script type='text/javascript'><!--//<![CDATA[
+   var m3_u = (location.protocol=='https:'?'https://ads.egrappler.com/www/delivery/ajs.php':'http://ads.egrappler.com/www/delivery/ajs.php');
+   var m3_r = Math.floor(Math.random()*99999999999);
+   if (!document.MAX_used) document.MAX_used = ',';
+   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+   document.write ("?zoneid=18");
+   document.write ('&amp;cb=' + m3_r);
+   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+   document.write ("&amp;loc=" + escape(window.location));
+   if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+   if (document.context) document.write ("&context=" + escape(document.context));
+   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+   document.write ("'><\/scr"+"ipt>");
+//]]>--></script><noscript><a href='http://ads.egrappler.com/www/delivery/ck.php?n=a905b6c4&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://ads.egrappler.com/www/delivery/avw.php?zoneid=18&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=a905b6c4' border='0' alt='' /></a></noscript>
+
+
+
+
+
+
+       <div style="padding: 8px 0px;"><script type='text/javascript'>
+<!--//<![CDATA[
+   document.MAX_ct0 ='';
+   var m3_u = (location.protocol=='https:'?'https://cas.criteo.com/delivery/ajs.php?':'http://cas.criteo.com/delivery/ajs.php?');
+   var m3_r = Math.floor(Math.random()*99999999999);
+   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+   document.write ("zoneid=254421");document.write("&amp;nodis=1");
+   document.write ('&amp;cb=' + m3_r);
+   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+   document.write ("&amp;loc=" + escape(window.location).substring(0,1600));
+   if (document.context) document.write ("&context=" + escape(document.context));
+   if ((typeof(document.MAX_ct0) != 'undefined') && (document.MAX_ct0.substring(0,4) == 'http')) {
+       document.write ("&amp;ct0=" + escape(document.MAX_ct0));
+   }
+   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+   document.write ("'></scr"+"ipt>");
+//]]>--></script></div>
+          <a href="https://twitter.com/intent/follow?original_referer=http%3A%2F%2Fwww.pythonforbeginners.com%2F&region=follow_link&screen_name=pythonbeginners&tw_p=followbutton" class="btn btn-lg btn-success" data-show-count="false" data-size="large"><span class="fa fa-twitter on fa-square-o"></span> follow @pythonbeginners</a><br/><br/>
+        <div style="padding: 8px 0px;"><script type="text/javascript" src="http://ap.lijit.com/www/delivery/fpi.js?z=296859&u=theeighth&width=300&height=250"></script></div>
+
+        <div class="categories">
+          <h3>Categories</h3>
+          <ul class="nav nav-pills nav-stacked">
+              <li><a href="/basics/">Basics</a></li>
+              <li><a href="/cheatsheet/">Cheatsheet</a></li>
+              <li><a href="/code-snippets-source-code/">Code snippets</a></li>
+              <li><a href="/development/">Development</a></li>
+              <li><a href="/dictionary/">Dictionary</a></li>
+              <li><a href="/error-handling/">Error Handling</a></li>
+              <li><a href="/lists/">Lists</a></li>
+              <li><a href="/loops/">Loops</a></li>
+              <li><a href="/modules-in-python/">Modules</a></li>
+              <li><a href="/python-strings/">Strings</a></li>
+              <li><a href="/systems-programming/">System &amp; OS</a></li>
+              <li><a href="/uncategorized/">Uncategorized</a></li>
+              <li><a href="/python-on-the-web/">Web &amp; Internet</a></li>
+          </ul>
+        </div>
+<div style="padding: 8px 0px;"><script type="text/javascript" src="http://ap.lijit.com/www/delivery/fpi.js?z=296876&u=theeighth&width=160&height=600"></script></div>
+      <div class="textwidget"><script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+        <g:page href="https://plus.google.com/102177732314069091949"></g:page>
+      </div>
+<script type="text/javascript" src="http://ap.lijit.com/www/delivery/fpi.js?z=296864&u=theeighth&width=300&height=250"></script>
+    </aside>
+</div>
+    </div> 
+
+
+            <div class="push"></div>
+        </div>
+       
+
+
+<div class="container container-footer">
+    <div id="footer">
+<script type="text/javascript" src="http://ap.lijit.com/www/delivery/fpi.js?z=296872&u=theeighth&width=728&height=90"></script><br>
+          &copy; <a href="http://pythonforbeginners.com" title="Perceptive Minds">Python For Beginners</a> 2012-2015  |  <a href="/privacy-policy/">Privacy Policy</a>
+    
+
+
+
+</div>
+</div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+        <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=doxy"></script>
+
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=1474940332733250";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+        
+ <script type="text/javascript">
+/* <![CDATA[ */
+    var disqus_url = 'http://www.pythonforbeginners.com/systems-programming/python-file-handling/';    
+    // var disqus_identifier = '743 http://www.pythonforbeginners.com/?p=743';
+    var disqus_container_id = 'disqus_thread';
+    var disqus_domain = 'disqus.com';
+    var disqus_shortname = 'pythonbeginners';
+    var disqus_title = "File Handling Cheat Sheet in Python";
+        var disqus_config = function () {
+        var config = this; // Access to the config object
+        config.language = '';
+
+        /*
+           All currently supported events:
+            * preData — fires just before we request for initial data
+            * preInit - fires after we get initial data but before we load any dependencies
+            * onInit  - fires when all dependencies are resolved but before dtpl template is rendered
+            * afterRender - fires when template is rendered but before we show it
+            * onReady - everything is done
+         */
+
+        config.callbacks.preData.push(function() {
+            // clear out the container (its filled for SEO/legacy purposes)
+            document.getElementById(disqus_container_id).innerHTML = '';
+        });
+                config.callbacks.onReady.push(function() {
+            // sync comments in the background so we don't block the page
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = '?cf_action=sync_comments&post_id=743';
+
+            var firstScript = document.getElementsByTagName( "script" )[0];
+            firstScript.parentNode.insertBefore(script, firstScript);
+        });
+                    };
+/* ]]> */
+</script>
+
+
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.' + 'disqus.com' + '/embed.js?pname=wordpress&pver=2.74';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+/* ]]> */
+</script>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+    </body>
+</html>

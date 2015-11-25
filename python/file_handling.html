@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<!-- saved from url=(0075)http://www.pythonforbeginners.com/systems-programming/python-file-handling/ -->
+<html lang="en-US" prefix="og: http://ogp.me/ns#"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <title>File Handling Cheat Sheet in Python</title>
+        <link rel="profile" href="http://gmpg.org/xfn/11">
+        <link rel="canonical" href="http://www.pythonforbeginners.com/">        
+        <meta property="og:locale" content="en_US">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="File Handling Cheat Sheet in Python">
+        <meta property="og:url" content="http://www.pythonforbeginners.com/systems-programming/python-file-handling/">
+        <meta property="og:site_name" content="Python For Beginners">        
+        <link rel="alternate" type="application/rss+xml" title="Python For Beginners » Feed" href="http://www.pythonforbeginners.com/feed/">
+        <link rel="alternate" type="application/rss+xml" title="Python For Beginners » Comments Feed" href="http://www.pythonforbeginners.com/comments/feed/">        
+        <meta name="description" lang="en-US" content=" File Handling File handling in Python requires no importing of modules. File Object Instead we can use the built-in object ... ">
+        <meta name="keywords" content="">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="http://s.pythonforbeginners.com/static/img/favicon.ico" type="image/x-icon">
+        <link href="./file_handling_files/css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="./file_handling_files/bootstrap.min.css">
+        <link rel="stylesheet" href="./file_handling_files/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="./file_handling_files/shCore.min.css">
+        <link rel="stylesheet" href="./file_handling_files/shThemeDefault.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="./file_handling_files/p4b.css">
+        <link href="./file_handling_files/font-awesome.min.css" rel="stylesheet">
+        
+<script async="" src="./file_handling_files/saved_resource"></script><script src="./file_handling_files/cb=gapi.loaded_2" async=""></script><script id="twitter-wjs" src="./file_handling_files/widgets.js"></script><script id="facebook-jssdk" src="./file_handling_files/all.js"></script><script src="./file_handling_files/cb=gapi.loaded_1" async=""></script><script src="./file_handling_files/cb=gapi.loaded_0" async=""></script><script async="" src="./file_handling_files/analytics.js"></script><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-64708426-1', 'auto');
+  ga('send', 'pageview');
+
+</script><style type="text/css"></style>
+<script type="text/javascript" src="http://s.ntv.io/serve/load.js" async=""></script>
+    <script async="" type="text/javascript" src="./file_handling_files/count.js"></script><script type="text/javascript" async="" src="http://s3.buysellads.com/ac/bsa.js"></script><link rel="stylesheet" type="text/css" href="./file_handling_files/doxy.css"><script type="text/javascript" async="" src="./file_handling_files/embed.js"></script><script type="text/javascript" charset="utf-8" async="" src="./file_handling_files/button.c44c2dc193c555561d5830b3b543eb26.js"></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow-x:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f6f7f8;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3a5795;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{width:auto;height:auto;min-height:initial;min-width:initial;background:none}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{color:#fff;display:block;padding-top:20px;clear:both;font-size:18px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #2f477a;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f8;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yD/r/t-wz8gw1xG1.png);background-repeat:no-repeat;background-position:50% 50%;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style></head>
+    <body>
+        <div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_http" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="Facebook Cross Domain Communication Frame" aria-hidden="true" tabindex="-1" id="fb_xdm_frame_http" src="./file_handling_files/TlA_zCeMkxl.html" style="border: none;"></iframe><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="Facebook Cross Domain Communication Frame" aria-hidden="true" tabindex="-1" id="fb_xdm_frame_https" src="./file_handling_files/TlA_zCeMkxl(1).html" style="border: none;"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="f17465d1e4" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" src="./file_handling_files/ping.html" style="display: none;"></iframe></div></div></div>
+
+        <div id="wrapper">
+            
+<div class="container navigation">  <div class="navbar navbar-inverse">  
+<script>
+function reloadMe() {
+	window.location.reload();
+}
+function getInterval(){
+	var lowerBound = 420;
+	var upperBound = 840;
+	
+	var randNum = Math.floor((upperBound-lowerBound+1)*Math.random()+lowerBound) * 1000;
+	return randNum;
+}
+var interval = getInterval();
+var srcInterval = setInterval("reloadMe()",interval);
+</script> 
+<script async="" type="text/javascript" src="http://cdn.fancybar.net/ac/fancybar.js?zoneid=1502&serve=C6ADVKE&placement=pythonforbeginners" id="_fancybar_js"></script>
+  
+     <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="glyphicon glyphicon-chevron-down"></span>
+        </button>        
+        <a class="navbar-brand" href="http://www.pythonforbeginners.com/" title="pythonforbeginners.com">
+          <span class="first-part">python</span> for beginners
+          <!-- <img src="http://s.pythonforbeginners.com/static/img/logo.png" alt="pythonforbeginners.com">-->
+        </a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          
+          <li><a href="http://www.pythonforbeginners.com/basics/" title="Basics">basics</a></li>
+          <li><a href="http://www.pythonforbeginners.com/lists/" title="lists">lists</a></li>
+          <li><a href="http://www.pythonforbeginners.com/dictionary-data-structure-in-python/" title="dictionary">dictionary</a></li>
+          <li><a href="http://www.pythonforbeginners.com/code-snippets-source-code/" title="code snippets">code snippets</a></li>
+          <li><a href="http://www.pythonforbeginners.com/modules-in-python/" title="modules">modules</a></li>
+         </ul>          
+      </div>
+  </div>
+<script type="text/javascript">
+<!--//<![CDATA[
+   document.MAX_ct0 ='';
+   var m3_u = (location.protocol=='https:'?'https://cas.criteo.com/delivery/ajs.php?':'http://cas.criteo.com/delivery/ajs.php?');
+   var m3_r = Math.floor(Math.random()*99999999999);
+   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+   document.write ("zoneid=254422");document.write("&amp;nodis=1");
+   document.write ('&amp;cb=' + m3_r);
+   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+   document.write ("&amp;loc=" + escape(window.location).substring(0,1600));
+   if (document.context) document.write ("&context=" + escape(document.context));
+   if ((typeof(document.MAX_ct0) != 'undefined') && (document.MAX_ct0.substring(0,4) == 'http')) {
+       document.write ("&amp;ct0=" + escape(document.MAX_ct0));
+   }
+   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+   document.write ("'></scr"+"ipt>");
+//]]>--></script><script type="text/javascript" src="http://cas.criteo.com/delivery/ajs.php?zoneid=254422&nodis=1&cb=54443356114&exclude=undefined&charset=UTF-8&loc=http%3A//www.pythonforbeginners.com/systems-programming/python-file-handling/"></script>
+
+
+<style>
+#right_bottom_ad {
+	position: fixed;
+	right: -325px;
+	bottom: 0;
+z-index: 1000;
+	width: 320px;
+	height: 270px;
+	
+	transition: all 0.5s;
+	-webkit-transition: all 0.8s;
+	-moz-transition: all 0.8s;
+	-o-transition: all 0.8s;
+}
+#right_bottom_ad.slide-in {
+	right: 0 !important;
+}
+#right_bottom_ad_close_box {
+	position: absolute;
+	top: 0px;
+	right: 15px;
+margin-top: -30px;
+background: #fff;
+padding: 0px 4px;
+}
+</style>
+
+<script>
+window.onload = function() {
+	document.getElementById('right_bottom_ad').setAttribute('class', 'slide-in');
+	
+	document.getElementById('close-button').addEventListener('click', function(event){
+    	event.preventDefault();
+    	document.getElementById('right_bottom_ad').removeAttribute('class', 'slide-in');
+	});
+
+var close = document.getElementById('close-button');
+var counter = 10;
+var newElement = document.getElementById('countdown');
+newElement.innerHTML = 10;
+var id;
+
+close.parentNode.replaceChild(newElement, close);
+
+id = setInterval(function() {
+    counter--;
+    if(counter < 0) {
+        newElement.parentNode.replaceChild(close, newElement);
+        clearInterval(id);
+    } else {
+        newElement.innerHTML = counter.toString();
+    }
+}, 1000);
+
+};
+</script>
+
+<div id="right_bottom_ad" class="slide-in">
+<div id="right_bottom_ad_close_box"><a href="http://www.pythonforbeginners.com/systems-programming/python-file-handling/#" id="close-button">X</a></div>
+<div class="ad_box">
+
+<script type="text/javascript" src="http://ap.lijit.com/www/delivery/fpi.js?z=315227&u=theeighth&width=300&height=250"></script>
+</div>
+</div> 
+
+
+</div>
+            
+
+
+
+
+<script type="text/javascript">
+
+	var disqus_shortname = 'pythonbeginners';
+	var disqus_identifier = "743 http://www.pythonforbeginners.com/?p=743";
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function () {
+		var s = document.createElement('script'); s.async = true;
+		s.type = 'text/javascript';
+		s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+	}());
+</script>
+
+   
+    <div class="container content">
+        <div class="col-md-7 col-lg-8">
+            <div class="post-header">
+                Jan. 02, 2013
+                <ul class="nav nav-pills">
+                
+                    <li><a href="http://www.pythonforbeginners.com/cheatsheet/" title="Cheatsheet"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Cheatsheet</a></li>
+                
+                    <li><a href="http://www.pythonforbeginners.com/filehandling/" title="Filehandling"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Filehandling</a></li>
+                
+                    <li><a href="http://www.pythonforbeginners.com/files/" title="Files"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Files</a></li>
+                
+                    <li><a href="http://www.pythonforbeginners.com/systems-programming/" title="System &amp; OS"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;System &amp; OS</a></li>
+                
+                </ul>
+            </div>
+            <h1>File Handling Cheat Sheet in Python</h1>
+           
+<!--/*
+  *
+  * Revive Adserver Javascript Tag
+  * - Generated with Revive Adserver v3.1.0
+  *
+  */-->
+
+<!--/*
+  * The backup image section of this tag has been generated for use on a
+  * non-SSL page. If this tag is to be placed on an SSL page, change the
+  *   'http://ads.egrappler.com/www/delivery/...'
+  * to
+  *   'https://ads.egrappler.com/www/delivery/...'
+  *
+  * This noscript section of this tag only shows image banners. There
+  * is no width or height in these banners, so if you want these tags to
+  * allocate space for the ad before it shows, you will need to add this
+  * information to the <img> tag.
+  *
+  * If you do not want to deal with the intricities of the noscript
+  * section, delete the tag (from <noscript>... to </noscript>). On
+  * average, the noscript tag is called from less than 1% of internet
+  * users.
+  */-->
+
+<script type="text/javascript"><!--//<![CDATA[
+   var m3_u = (location.protocol=='https:'?'https://ads.egrappler.com/www/delivery/ajs.php':'http://ads.egrappler.com/www/delivery/ajs.php');
+   var m3_r = Math.floor(Math.random()*99999999999);
+   if (!document.MAX_used) document.MAX_used = ',';
+   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+   document.write ("?zoneid=77");
+   document.write ('&amp;cb=' + m3_r);
+   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+   document.write ("&amp;loc=" + escape(window.location));
+   if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+   if (document.context) document.write ("&context=" + escape(document.context));
+   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+   document.write ("'><\/scr"+"ipt>");
+//]]>--></script><script type="text/javascript" src="http://ads.egrappler.com/www/delivery/ajs.php?zoneid=77&cb=8063508244&charset=UTF-8&loc=http%3A//www.pythonforbeginners.com/systems-programming/python-file-handling/&referer=http%3A//www.pythonforbeginners.com/cheatsheet/python-cheat-sheets"></script><noscript>&lt;a href='http://ads.egrappler.com/www/delivery/ck.php?n=af1b78cc&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'&gt;&lt;img src='http://ads.egrappler.com/www/delivery/avw.php?zoneid=77&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;amp;n=af1b78cc' border='0' alt='' /&gt;&lt;/a&gt;</noscript>
+
+
+
+            <div class="post-bodycopy cf">
+                <h2>File Handling</h2>
+<pre>File handling in Python requires no importing of modules. 
+</pre>
+
+<h2>File Object</h2>
+<pre>Instead we can use the built-in object "file". 
+
+That object provides basic functions and methods necessary to manipulate files
+by default. 
+
+Before you can read, append or write to a file, you will first have to it using
+Python's built-in open() function. 
+
+In this post I will describe how to use the different methods of the file object. 
+</pre>
+
+<h2>Open()</h2>
+<pre>The open() function is used to open files in our system, the filename is the
+name of the file to be opened. 
+
+The mode indicates, how the file is going to be opened "r" for reading,
+"w" for writing and "a" for a appending. 
+
+The open function takes two arguments, the name of the file and and the mode
+for which we would like to open the file. 
+
+By default, when only the filename is passed, the open function opens the file
+in read mode.
+</pre>
+
+<h2>Example</h2>
+<pre>This small script, will open the (hello.txt) and print the content. 
+
+This will store the file information in the file object "filename".
+</pre>
+
+<pre class="prettyprint prettyprinted"><span class="pln">filename </span><span class="pun">=</span><span class="pln"> </span><span class="str">"hello.txt"</span><span class="pln">
+file </span><span class="pun">=</span><span class="pln"> open</span><span class="pun">(</span><span class="pln">filename</span><span class="pun">,</span><span class="pln"> </span><span class="str">"r"</span><span class="pun">)</span><span class="pln">
+</span><span class="kwd">for</span><span class="pln"> line </span><span class="kwd">in</span><span class="pln"> file</span><span class="pun">:</span><span class="pln">
+   </span><span class="kwd">print</span><span class="pln"> line</span><span class="pun">,</span></pre>
+
+<h2>Read ()</h2>
+<pre>The read functions contains different methods, read(),readline() and readlines()
+
+read()		#return one big string
+
+readline	#return one line at a time
+
+readlines	#returns a list of lines
+</pre>
+
+<h2>Write ()</h2>
+<pre>This method writes a sequence of strings to the file.
+
+write ()	#Used to write a fixed sequence of characters to a file
+
+writelines()	#writelines can write a list of strings.
+</pre>
+
+<h2>Append ()</h2>
+<pre>The append function is used to append to the file instead of overwriting it.
+
+To append to an existing file, simply open the file in append mode ("a"):
+</pre>
+
+<h2>Close()</h2>
+<pre>When you’re done with a file, use close() to close it and free up any system
+resources taken up by the open file
+</pre>
+
+<h2>File Handling Examples</h2>
+<pre>Let's show some examples
+</pre>
+
+<pre><strong>To open a text file, use:
+</strong>fh = open("hello.txt", "r")
+
+<strong>To read a text file, use:
+</strong>fh = open("hello.txt","r")
+print fh.read()
+
+<strong>To read one line at a time, use:
+</strong>fh = open("hello".txt", "r")
+print fh.readline()
+
+<strong>To read a list of lines use:
+</strong>fh = open("hello.txt.", "r")
+print fh.readlines()
+
+<strong>To write to a file, use:
+</strong>fh = open("hello.txt","w")
+write("Hello World")
+fh.close()
+
+<strong>To write to a file, use:
+</strong>fh = open("hello.txt", "w")
+lines_of_text = ["a line of text", "another line of text", "a third line"]
+fh.writelines(lines_of_text)
+fh.close()
+
+<strong>To append to file, use:
+</strong>fh = open("Hello.txt", "a")
+write("Hello World again")
+fh.close
+
+<strong>To close a file, use
+</strong>fh = open("hello.txt", "r")
+print fh.read()
+fh.close()
+</pre>
+
+
+                <div>
+                    <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" class="twitter-share-button twitter-share-button-rendered twitter-tweet-button" title="Twitter Tweet Button" src="./file_handling_files/tweet_button.781f4f0ed6951ea86890554cec78adec.en.html" style="position: static; visibility: visible; width: 76px; height: 28px;" data-url="http://www.pythonforbeginners.com/systems-programming/python-file-handling/"></iframe>
+                    <div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 106px; height: 24px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 106px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 24px;" tabindex="0" vspace="0" width="100%" id="I0_1448415507442" name="I0_1448415507442" src="./file_handling_files/fastbutton.html" data-gapiattached="true" title="+1"></iframe></div>
+                    <div class="fb-like fb_iframe_widget" data-href="http://www.pythonforbeginners.com/systems-programming/python-file-handling/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=1474940332733250&amp;container_width=749&amp;href=http%3A%2F%2Fwww.pythonforbeginners.com%2Fsystems-programming%2Fpython-file-handling%2F&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;share=true&amp;show_faces=true"><span style="vertical-align: bottom; width: 120px; height: 20px;"><iframe name="f3f49e5ea4" width="1000px" height="1000px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:like Facebook Social Plugin" src="./file_handling_files/like.html" style="border: none; visibility: visible; width: 120px; height: 20px;" class=""></iframe></span></div>                        
+                </div><br><br>
+
+<div style="text-align: center; padding: 8px;">
+<!--/*
+  *
+  * Revive Adserver Javascript Tag
+  * - Generated with Revive Adserver v3.1.0
+  *
+  */-->
+
+<!--/*
+  * The backup image section of this tag has been generated for use on a
+  * non-SSL page. If this tag is to be placed on an SSL page, change the
+  *   'http://ads.egrappler.com/www/delivery/...'
+  * to
+  *   'https://ads.egrappler.com/www/delivery/...'
+  *
+  * This noscript section of this tag only shows image banners. There
+  * is no width or height in these banners, so if you want these tags to
+  * allocate space for the ad before it shows, you will need to add this
+  * information to the <img> tag.
+  *
+  * If you do not want to deal with the intricities of the noscript
+  * section, delete the tag (from <noscript>... to </noscript>). On
+  * average, the noscript tag is called from less than 1% of internet
+  * users.
+  */-->
+
+<script type="text/javascript"><!--//<![CDATA[
+   var m3_u = (location.protocol=='https:'?'https://ads.egrappler.com/www/delivery/ajs.php':'http://ads.egrappler.com/www/delivery/ajs.php');
+   var m3_r = Math.floor(Math.random()*99999999999);
+   if (!document.MAX_used) document.MAX_used = ',';
+   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+   document.write ("?zoneid=67");
+   document.write ('&amp;cb=' + m3_r);
+   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+   document.write ("&amp;loc=" + escape(window.location));
+   if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+   if (document.context) document.write ("&context=" + escape(document.context));
+   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+   document.write ("'><\/scr"+"ipt>");
+//]]>--></script><script type="text/javascript" src="http://ads.egrappler.com/www/delivery/ajs.php?zoneid=67&cb=77754475478&charset=UTF-8&loc=http%3A//www.pythonforbeginners.com/systems-programming/python-file-handling/&referer=http%3A//www.pythonforbeginners.com/cheatsheet/python-cheat-sheets"></script><noscript>&lt;a href='http://ads.egrappler.com/www/delivery/ck.php?n=a66ef10b&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'&gt;&lt;img src='http://ads.egrappler.com/www/delivery/avw.php?zoneid=67&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;amp;n=a66ef10b' border='0' alt='' /&gt;&lt;/a&gt;</noscript>
+
+</div>
+
+                Read more about:
+                <ul class="nav nav-pills">
+                
+                <li><a href="http://www.pythonforbeginners.com/cheatsheet/" title="Cheatsheet"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Cheatsheet</a></li>
+                
+                <li><a href="http://www.pythonforbeginners.com/filehandling/" title="Filehandling"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Filehandling</a></li>
+                
+                <li><a href="http://www.pythonforbeginners.com/files/" title="Files"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Files</a></li>
+                
+                <li><a href="http://www.pythonforbeginners.com/systems-programming/" title="System &amp; OS"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;System &amp; OS</a></li>
+                
+                </ul>
+            </div>
+        
+            <div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./file_handling_files/saved_resource.html" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 1007px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+
+        </div>
+        
+<div class="col-md-5 col-lg-4">
+    <form role="form" id="search" method="get" action="http://www.pythonforbeginners.com/search/"> 
+      <div class="input-group">
+          <input type="text" placeholder="Search" id="q" name="q" class="form-control">
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-default">SEARCH</button>
+          </span>               
+      </div>
+    </form>
+    <aside>
+<div style="padding: 8px 8px;">
+
+
+<script type="text/javascript" src="http://cssdeck.com/assets/js/advert.js"></script>
+<script type="text/javascript">
+if (document.getElementById("tester") == undefined) 
+{ 
+document.write('<div class="adblock" style="padding: 5px;border: 1px solid #ddd;margin: 10px 5px;"><div style="padding-bottom: 10px;"><span style="font-weight: bold;font-size: 18px;">Essential Core Python Cheat Sheet</span><br> Free eBook in exchange for filling out a short form!</div><a href="http://egrappler.tradepub.com/free/w_dzon15/prgm.cgi?a=1"><img src="http://img.tradepub.com/free/w_dzon15/images/w_dzon15c8.jpg" style="width: 300px; height auto"></a></div>'); 
+}
+ 
+</script><div class="adblock" style="padding: 5px;border: 1px solid #ddd;margin: 10px 5px;"><div style="padding-bottom: 10px;"><span style="font-weight: bold;font-size: 18px;">Essential Core Python Cheat Sheet</span><br> Free eBook in exchange for filling out a short form!</div><a href="http://egrappler.tradepub.com/free/w_dzon15/prgm.cgi?a=1"><img src="./file_handling_files/w_dzon15c8.jpg" style="width: 300px; height auto"></a></div> 
+
+
+<!-- BuySellAds Ad Code -->
+<script type="text/javascript">
+(function(){
+  var bsa = document.createElement('script');
+     bsa.type = 'text/javascript';
+     bsa.async = true;
+     bsa.src = '//s3.buysellads.com/ac/bsa.js';
+  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+})();
+</script>
+<!-- End BuySellAds Ad Code -->
+<!-- BuySellAds Zone Code -->
+<div id="bsap_1303531" class="bsarocks bsap_d9686a1e7fd5c4eaea6cc68d37c9bce9"></div>
+<!-- End BuySellAds Zone Code -->
+</div>
+
+
+
+
+<!--/*
+  *
+  * Revive Adserver Javascript Tag
+  * - Generated with Revive Adserver v3.1.0
+  *
+  */-->
+
+<!--/*
+  * The backup image section of this tag has been generated for use on a
+  * non-SSL page. If this tag is to be placed on an SSL page, change the
+  *   'http://ads.egrappler.com/www/delivery/...'
+  * to
+  *   'https://ads.egrappler.com/www/delivery/...'
+  *
+  * This noscript section of this tag only shows image banners. There
+  * is no width or height in these banners, so if you want these tags to
+  * allocate space for the ad before it shows, you will need to add this
+  * information to the <img> tag.
+  *
+  * If you do not want to deal with the intricities of the noscript
+  * section, delete the tag (from <noscript>... to </noscript>). On
+  * average, the noscript tag is called from less than 1% of internet
+  * users.
+  */-->
+
+<script type="text/javascript"><!--//<![CDATA[
+   var m3_u = (location.protocol=='https:'?'https://ads.egrappler.com/www/delivery/ajs.php':'http://ads.egrappler.com/www/delivery/ajs.php');
+   var m3_r = Math.floor(Math.random()*99999999999);
+   if (!document.MAX_used) document.MAX_used = ',';
+   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+   document.write ("?zoneid=18");
+   document.write ('&amp;cb=' + m3_r);
+   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+   document.write ("&amp;loc=" + escape(window.location));
+   if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+   if (document.context) document.write ("&context=" + escape(document.context));
+   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+   document.write ("'><\/scr"+"ipt>");
+//]]>--></script><script type="text/javascript" src="http://ads.egrappler.com/www/delivery/ajs.php?zoneid=18&cb=32161917001&charset=UTF-8&loc=http%3A//www.pythonforbeginners.com/systems-programming/python-file-handling/&referer=http%3A//www.pythonforbeginners.com/cheatsheet/python-cheat-sheets"></script><noscript>&lt;a href='http://ads.egrappler.com/www/delivery/ck.php?n=a905b6c4&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'&gt;&lt;img src='http://ads.egrappler.com/www/delivery/avw.php?zoneid=18&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;amp;n=a905b6c4' border='0' alt='' /&gt;&lt;/a&gt;</noscript>
+
+
+
+
+
+
+       <div style="padding: 8px 0px;"><script type="text/javascript">
+<!--//<![CDATA[
+   document.MAX_ct0 ='';
+   var m3_u = (location.protocol=='https:'?'https://cas.criteo.com/delivery/ajs.php?':'http://cas.criteo.com/delivery/ajs.php?');
+   var m3_r = Math.floor(Math.random()*99999999999);
+   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+   document.write ("zoneid=254421");document.write("&amp;nodis=1");
+   document.write ('&amp;cb=' + m3_r);
+   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+   document.write ("&amp;loc=" + escape(window.location).substring(0,1600));
+   if (document.context) document.write ("&context=" + escape(document.context));
+   if ((typeof(document.MAX_ct0) != 'undefined') && (document.MAX_ct0.substring(0,4) == 'http')) {
+       document.write ("&amp;ct0=" + escape(document.MAX_ct0));
+   }
+   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+   document.write ("'></scr"+"ipt>");
+//]]>--></script><script type="text/javascript" src="http://cas.criteo.com/delivery/ajs.php?zoneid=254421&nodis=1&cb=83315616426&charset=UTF-8&loc=http%3A//www.pythonforbeginners.com/systems-programming/python-file-handling/"></script></div>
+          <a href="https://twitter.com/intent/follow?original_referer=http%3A%2F%2Fwww.pythonforbeginners.com%2F&region=follow_link&screen_name=pythonbeginners&tw_p=followbutton" class="btn btn-lg btn-success" data-show-count="false" data-size="large"><span class="fa fa-twitter on fa-square-o"></span> follow @pythonbeginners</a><br><br>
+        <div style="padding: 8px 0px;"><script type="text/javascript" src="http://ap.lijit.com/www/delivery/fpi.js?z=296859&u=theeighth&width=300&height=250"></script></div>
+
+        <div class="categories">
+          <h3>Categories</h3>
+          <ul class="nav nav-pills nav-stacked">
+              <li><a href="http://www.pythonforbeginners.com/basics/">Basics</a></li>
+              <li><a href="http://www.pythonforbeginners.com/cheatsheet/">Cheatsheet</a></li>
+              <li><a href="http://www.pythonforbeginners.com/code-snippets-source-code/">Code snippets</a></li>
+              <li><a href="http://www.pythonforbeginners.com/development/">Development</a></li>
+              <li><a href="http://www.pythonforbeginners.com/dictionary/">Dictionary</a></li>
+              <li><a href="http://www.pythonforbeginners.com/error-handling/">Error Handling</a></li>
+              <li><a href="http://www.pythonforbeginners.com/lists/">Lists</a></li>
+              <li><a href="http://www.pythonforbeginners.com/loops/">Loops</a></li>
+              <li><a href="http://www.pythonforbeginners.com/modules-in-python/">Modules</a></li>
+              <li><a href="http://www.pythonforbeginners.com/python-strings/">Strings</a></li>
+              <li><a href="http://www.pythonforbeginners.com/systems-programming/">System &amp; OS</a></li>
+              <li><a href="http://www.pythonforbeginners.com/uncategorized/">Uncategorized</a></li>
+              <li><a href="http://www.pythonforbeginners.com/python-on-the-web/">Web &amp; Internet</a></li>
+          </ul>
+        </div>
+<div style="padding: 8px 0px;"><script type="text/javascript" src="http://ap.lijit.com/www/delivery/fpi.js?z=296876&u=theeighth&width=160&height=600"></script></div>
+      <div class="textwidget"><script type="text/javascript" src="./file_handling_files/plusone.js" gapi_processed="true"></script>
+        <div id="___page_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 300px; height: 352px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 300px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 352px;" tabindex="0" vspace="0" width="100%" id="I1_1448415507576" name="I1_1448415507576" src="./file_handling_files/page.html" data-gapiattached="true" title="+Badge"></iframe></div>
+      </div>
+<script type="text/javascript" src="http://ap.lijit.com/www/delivery/fpi.js?z=296864&u=theeighth&width=300&height=250"></script>
+    </aside>
+</div>
+    </div> 
+
+
+            <div class="push"></div>
+        </div>
+       
+
+
+<div class="container container-footer">
+    <div id="footer">
+<script type="text/javascript" src="http://ap.lijit.com/www/delivery/fpi.js?z=296872&u=theeighth&width=728&height=90"></script><br>
+          © <a href="http://pythonforbeginners.com/" title="Perceptive Minds">Python For Beginners</a> 2012-2015  |  <a href="http://www.pythonforbeginners.com/privacy-policy/">Privacy Policy</a>
+    
+
+
+
+</div>
+</div>
+
+        <script src="./file_handling_files/jquery.min.js"></script>
+        <script src="./file_handling_files/bootstrap.min.js"></script>
+        
+
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=1474940332733250";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script><iframe name="oauth2relay662448266" id="oauth2relay662448266" src="./file_handling_files/postmessageRelay.html" tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe>
+        
+ <script type="text/javascript">
+/* <![CDATA[ */
+    var disqus_url = 'http://www.pythonforbeginners.com/systems-programming/python-file-handling/';    
+    // var disqus_identifier = '743 http://www.pythonforbeginners.com/?p=743';
+    var disqus_container_id = 'disqus_thread';
+    var disqus_domain = 'disqus.com';
+    var disqus_shortname = 'pythonbeginners';
+    var disqus_title = "File Handling Cheat Sheet in Python";
+        var disqus_config = function () {
+        var config = this; // Access to the config object
+        config.language = '';
+
+        /*
+           All currently supported events:
+            * preData — fires just before we request for initial data
+            * preInit - fires after we get initial data but before we load any dependencies
+            * onInit  - fires when all dependencies are resolved but before dtpl template is rendered
+            * afterRender - fires when template is rendered but before we show it
+            * onReady - everything is done
+         */
+
+        config.callbacks.preData.push(function() {
+            // clear out the container (its filled for SEO/legacy purposes)
+            document.getElementById(disqus_container_id).innerHTML = '';
+        });
+                config.callbacks.onReady.push(function() {
+            // sync comments in the background so we don't block the page
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = '?cf_action=sync_comments&post_id=743';
+
+            var firstScript = document.getElementsByTagName( "script" )[0];
+            firstScript.parentNode.insertBefore(script, firstScript);
+        });
+                    };
+/* ]]> */
+</script>
+
+
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.' + 'disqus.com' + '/embed.js?pname=wordpress&pver=2.74';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+/* ]]> */
+</script>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+    
+
+</body></html>

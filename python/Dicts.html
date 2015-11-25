@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<!-- saved from url=(0078)http://www.pythonforbeginners.com/dictionary/dictionary-manipulation-in-python -->
+<html lang="en-US" prefix="og: http://ogp.me/ns#"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Dictionary Manipulation in Python</title>
+        <link rel="profile" href="http://gmpg.org/xfn/11">
+        <link rel="canonical" href="http://www.pythonforbeginners.com/">        
+        <meta property="og:locale" content="en_US">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Dictionary Manipulation in Python">
+        <meta property="og:url" content="http://www.pythonforbeginners.com/dictionary/dictionary-manipulation-in-python">
+        <meta property="og:site_name" content="Python For Beginners">        
+        <link rel="alternate" type="application/rss+xml" title="Python For Beginners » Feed" href="http://www.pythonforbeginners.com/feed/">
+        <link rel="alternate" type="application/rss+xml" title="Python For Beginners » Comments Feed" href="http://www.pythonforbeginners.com/comments/feed/">        
+        <meta name="description" lang="en-US" content=" Overview A dictionary is a collection of key-value pairs. A dictionary is a set of key:value pairs. All keys in ... ">
+        <meta name="keywords" content="">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="http://s.pythonforbeginners.com/static/img/favicon.ico" type="image/x-icon">
+        <link href="./Dicts_files/css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="./Dicts_files/bootstrap.min.css">
+        <link rel="stylesheet" href="./Dicts_files/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="./Dicts_files/shCore.min.css">
+        <link rel="stylesheet" href="./Dicts_files/shThemeDefault.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="./Dicts_files/p4b.css">
+        <link href="./Dicts_files/font-awesome.min.css" rel="stylesheet">
+        
+<script async="" src="./Dicts_files/dictionary-manipulation-in-python"></script><script src="./Dicts_files/cb=gapi.loaded_2" async=""></script><script id="twitter-wjs" src="./Dicts_files/widgets.js"></script><script id="facebook-jssdk" src="./Dicts_files/all.js"></script><script src="./Dicts_files/cb=gapi.loaded_1" async=""></script><script src="./Dicts_files/cb=gapi.loaded_0" async=""></script><script async="" src="./Dicts_files/analytics.js"></script><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-64708426-1', 'auto');
+  ga('send', 'pageview');
+
+</script><style type="text/css"></style>
+<script type="text/javascript" src="http://s.ntv.io/serve/load.js" async=""></script>
+    <script async="" type="text/javascript" src="./Dicts_files/count.js"></script><script type="text/javascript" async="" src="http://s3.buysellads.com/ac/bsa.js"></script><link rel="stylesheet" type="text/css" href="./Dicts_files/doxy.css"><script type="text/javascript" async="" src="./Dicts_files/embed.js"></script><script type="text/javascript" charset="utf-8" async="" src="./Dicts_files/button.c44c2dc193c555561d5830b3b543eb26.js"></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow-x:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f6f7f8;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3a5795;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{width:auto;height:auto;min-height:initial;min-width:initial;background:none}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{color:#fff;display:block;padding-top:20px;clear:both;font-size:18px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #2f477a;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f8;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yD/r/t-wz8gw1xG1.png);background-repeat:no-repeat;background-position:50% 50%;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style></head>
+    <body>
+        <div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_http" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="Facebook Cross Domain Communication Frame" aria-hidden="true" tabindex="-1" id="fb_xdm_frame_http" src="./Dicts_files/TlA_zCeMkxl.html" style="border: none;"></iframe><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="Facebook Cross Domain Communication Frame" aria-hidden="true" tabindex="-1" id="fb_xdm_frame_https" src="./Dicts_files/TlA_zCeMkxl(1).html" style="border: none;"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="f3683cff24" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" src="./Dicts_files/ping.html" style="display: none;"></iframe></div></div></div>
+
+        <div id="wrapper">
+            
+<div class="container navigation">  <div class="navbar navbar-inverse">  
+<script>
+function reloadMe() {
+	window.location.reload();
+}
+function getInterval(){
+	var lowerBound = 420;
+	var upperBound = 840;
+	
+	var randNum = Math.floor((upperBound-lowerBound+1)*Math.random()+lowerBound) * 1000;
+	return randNum;
+}
+var interval = getInterval();
+var srcInterval = setInterval("reloadMe()",interval);
+</script> 
+<script async="" type="text/javascript" src="http://cdn.fancybar.net/ac/fancybar.js?zoneid=1502&serve=C6ADVKE&placement=pythonforbeginners" id="_fancybar_js"></script>
+  
+     <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="glyphicon glyphicon-chevron-down"></span>
+        </button>        
+        <a class="navbar-brand" href="http://www.pythonforbeginners.com/" title="pythonforbeginners.com">
+          <span class="first-part">python</span> for beginners
+          <!-- <img src="http://s.pythonforbeginners.com/static/img/logo.png" alt="pythonforbeginners.com">-->
+        </a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          
+          <li><a href="http://www.pythonforbeginners.com/basics/" title="Basics">basics</a></li>
+          <li><a href="http://www.pythonforbeginners.com/lists/" title="lists">lists</a></li>
+          <li><a href="http://www.pythonforbeginners.com/dictionary-data-structure-in-python/" title="dictionary">dictionary</a></li>
+          <li><a href="http://www.pythonforbeginners.com/code-snippets-source-code/" title="code snippets">code snippets</a></li>
+          <li><a href="http://www.pythonforbeginners.com/modules-in-python/" title="modules">modules</a></li>
+         </ul>          
+      </div>
+  </div>
+<script type="text/javascript">
+<!--//<![CDATA[
+   document.MAX_ct0 ='';
+   var m3_u = (location.protocol=='https:'?'https://cas.criteo.com/delivery/ajs.php?':'http://cas.criteo.com/delivery/ajs.php?');
+   var m3_r = Math.floor(Math.random()*99999999999);
+   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+   document.write ("zoneid=254422");document.write("&amp;nodis=1");
+   document.write ('&amp;cb=' + m3_r);
+   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+   document.write ("&amp;loc=" + escape(window.location).substring(0,1600));
+   if (document.context) document.write ("&context=" + escape(document.context));
+   if ((typeof(document.MAX_ct0) != 'undefined') && (document.MAX_ct0.substring(0,4) == 'http')) {
+       document.write ("&amp;ct0=" + escape(document.MAX_ct0));
+   }
+   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+   document.write ("'></scr"+"ipt>");
+//]]>--></script><script type="text/javascript" src="http://cas.criteo.com/delivery/ajs.php?zoneid=254422&nodis=1&cb=57797813694&exclude=undefined&charset=UTF-8&loc=http%3A//www.pythonforbeginners.com/dictionary/dictionary-manipulation-in-python"></script>
+
+
+<style>
+#right_bottom_ad {
+	position: fixed;
+	right: -325px;
+	bottom: 0;
+z-index: 1000;
+	width: 320px;
+	height: 270px;
+	
+	transition: all 0.5s;
+	-webkit-transition: all 0.8s;
+	-moz-transition: all 0.8s;
+	-o-transition: all 0.8s;
+}
+#right_bottom_ad.slide-in {
+	right: 0 !important;
+}
+#right_bottom_ad_close_box {
+	position: absolute;
+	top: 0px;
+	right: 15px;
+margin-top: -30px;
+background: #fff;
+padding: 0px 4px;
+}
+</style>
+
+<script>
+window.onload = function() {
+	document.getElementById('right_bottom_ad').setAttribute('class', 'slide-in');
+	
+	document.getElementById('close-button').addEventListener('click', function(event){
+    	event.preventDefault();
+    	document.getElementById('right_bottom_ad').removeAttribute('class', 'slide-in');
+	});
+
+var close = document.getElementById('close-button');
+var counter = 10;
+var newElement = document.getElementById('countdown');
+newElement.innerHTML = 10;
+var id;
+
+close.parentNode.replaceChild(newElement, close);
+
+id = setInterval(function() {
+    counter--;
+    if(counter < 0) {
+        newElement.parentNode.replaceChild(close, newElement);
+        clearInterval(id);
+    } else {
+        newElement.innerHTML = counter.toString();
+    }
+}, 1000);
+
+};
+</script>
+
+<div id="right_bottom_ad" class="slide-in">
+<div id="right_bottom_ad_close_box"><a href="http://www.pythonforbeginners.com/dictionary/dictionary-manipulation-in-python#" id="close-button">X</a></div>
+<div class="ad_box">
+
+<script type="text/javascript" src="http://ap.lijit.com/www/delivery/fpi.js?z=315227&u=theeighth&width=300&height=250"></script>
+</div>
+</div> 
+
+
+</div>
+            
+
+
+
+
+<script type="text/javascript">
+
+	var disqus_shortname = 'pythonbeginners';
+	var disqus_identifier = "5000 http://www.pythonforbeginners.com/?p=5000";
+
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	(function () {
+		var s = document.createElement('script'); s.async = true;
+		s.type = 'text/javascript';
+		s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+	}());
+</script>
+
+   
+    <div class="container content">
+        <div class="col-md-7 col-lg-8">
+            <div class="post-header">
+                Apr. 16, 2013
+                <ul class="nav nav-pills">
+                
+                    <li><a href="http://www.pythonforbeginners.com/dictionary/" title="Dictionary"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Dictionary</a></li>
+                
+                </ul>
+            </div>
+            <h1>Dictionary Manipulation in Python</h1>
+           
+<!--/*
+  *
+  * Revive Adserver Javascript Tag
+  * - Generated with Revive Adserver v3.1.0
+  *
+  */-->
+
+<!--/*
+  * The backup image section of this tag has been generated for use on a
+  * non-SSL page. If this tag is to be placed on an SSL page, change the
+  *   'http://ads.egrappler.com/www/delivery/...'
+  * to
+  *   'https://ads.egrappler.com/www/delivery/...'
+  *
+  * This noscript section of this tag only shows image banners. There
+  * is no width or height in these banners, so if you want these tags to
+  * allocate space for the ad before it shows, you will need to add this
+  * information to the <img> tag.
+  *
+  * If you do not want to deal with the intricities of the noscript
+  * section, delete the tag (from <noscript>... to </noscript>). On
+  * average, the noscript tag is called from less than 1% of internet
+  * users.
+  */-->
+
+<script type="text/javascript"><!--//<![CDATA[
+   var m3_u = (location.protocol=='https:'?'https://ads.egrappler.com/www/delivery/ajs.php':'http://ads.egrappler.com/www/delivery/ajs.php');
+   var m3_r = Math.floor(Math.random()*99999999999);
+   if (!document.MAX_used) document.MAX_used = ',';
+   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+   document.write ("?zoneid=77");
+   document.write ('&amp;cb=' + m3_r);
+   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+   document.write ("&amp;loc=" + escape(window.location));
+   if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+   if (document.context) document.write ("&context=" + escape(document.context));
+   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+   document.write ("'><\/scr"+"ipt>");
+//]]>--></script><script type="text/javascript" src="http://ads.egrappler.com/www/delivery/ajs.php?zoneid=77&cb=10476990253&charset=UTF-8&loc=http%3A//www.pythonforbeginners.com/dictionary/dictionary-manipulation-in-python&referer=http%3A//www.pythonforbeginners.com/dictionary/"></script><noscript>&lt;a href='http://ads.egrappler.com/www/delivery/ck.php?n=af1b78cc&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'&gt;&lt;img src='http://ads.egrappler.com/www/delivery/avw.php?zoneid=77&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;amp;n=af1b78cc' border='0' alt='' /&gt;&lt;/a&gt;</noscript>
+
+
+
+            <div class="post-bodycopy cf">
+                <h2>Overview</h2>
+<pre>A dictionary is a collection of key-value pairs. 
+
+A dictionary is a set of key:value pairs. 
+
+All keys in a dictionary must be unique.
+
+In a dictionary, a key and its value are separated by a colon.
+
+The key, value pairs are separated with commas.
+
+The key &amp; value pairs are listed between curly brackets " { } "
+
+We query the dictionary using square brackets " [ ] "
+</pre>
+
+<h2>Dictionary Manipulation</h2>
+<pre>Dictionaries are useful whenever you have to items that you wish to link together,
+and for example storing results for quick lookup.
+</pre>
+
+<pre>Create an empty dictionary
+</pre>
+<pre class="prettyprint prettyprinted"><span class="pln">months </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{}</span></pre>
+
+<pre>Create a dictionary with some pairs
+
+# Note: Each key must be unique
+</pre>
+<pre class="prettyprint prettyprinted"><span class="pln">months </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="lit">1</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"January"</span><span class="pun">,</span><span class="pln"> 
+     	</span><span class="lit">2</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"February"</span><span class="pun">,</span><span class="pln"> 
+    	</span><span class="lit">3</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"March"</span><span class="pun">,</span><span class="pln"> 
+        </span><span class="lit">4</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"April"</span><span class="pun">,</span><span class="pln"> 
+     	</span><span class="lit">5</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"May"</span><span class="pun">,</span><span class="pln"> 
+     	</span><span class="lit">6</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"June"</span><span class="pun">,</span><span class="pln"> 
+    	</span><span class="lit">7</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"July"</span><span class="pun">,</span><span class="pln">
+        </span><span class="lit">8</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"August"</span><span class="pun">,</span><span class="pln">
+     	</span><span class="lit">9</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"September"</span><span class="pun">,</span><span class="pln"> 
+    	</span><span class="lit">10</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"October"</span><span class="pun">,</span><span class="pln"> 
+        </span><span class="lit">11</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"November"</span><span class="pun">,</span><span class="pln">
+    	</span><span class="lit">12</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"December"</span><span class="pln"> </span><span class="pun">}</span><span class="pln"> 
+  </span></pre>
+<pre>months[1-12] are keys and "January-December" are the values
+</pre>
+
+<pre>Print all keys
+</pre>
+
+<pre class="prettyprint prettyprinted"><span class="kwd">print</span><span class="pln"> </span><span class="str">"The dictionary contains the following keys: "</span><span class="pun">,</span><span class="pln"> months</span><span class="pun">.</span><span class="pln">keys</span><span class="pun">()</span></pre>
+
+<pre>Output:
+
+The dictionary contains the following keys:  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+11, 12]
+</pre>
+
+<pre><strong>Accessing</strong>
+
+To get a value out of a dictionary, you must supply its key, you cannot provide
+the value and get the key
+</pre>
+
+<pre class="prettyprint prettyprinted"><span class="pln">whichMonth </span><span class="pun">=</span><span class="pln"> months</span><span class="pun">[</span><span class="lit">1</span><span class="pun">]</span><span class="pln">
+</span><span class="kwd">print</span><span class="pln"> whichMonth</span></pre>
+
+<pre>Output: January
+</pre>
+
+<pre>To delete an element from a dictionary, use del
+</pre>
+
+<pre class="prettyprint prettyprinted"><span class="kwd">del</span><span class="pun">(</span><span class="pln">months</span><span class="pun">[</span><span class="lit">5</span><span class="pun">])</span><span class="pln">
+</span><span class="kwd">print</span><span class="pln"> months</span><span class="pun">.</span><span class="pln">keys</span><span class="pun">()</span></pre>
+
+<pre>Output:
+[1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12]
+</pre>
+
+<pre>To add a new element to a dictionary, assign a value to a new key
+</pre>
+
+<pre class="prettyprint prettyprinted"><span class="pln">
+months</span><span class="pun">[</span><span class="lit">5</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="str">"May"</span><span class="pln">
+</span><span class="kwd">print</span><span class="pln"> months</span><span class="pun">.</span><span class="pln">keys</span><span class="pun">()</span></pre>
+
+<pre>Output:
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+</pre>
+
+<pre>To update an element of a dictionary, assign a new value to its key
+</pre>
+
+<pre class="prettyprint prettyprinted"><span class="pln">months</span><span class="pun">[</span><span class="lit">1</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="str">"Jan"</span><span class="pln">
+</span><span class="kwd">print</span><span class="pln"> months</span></pre>
+
+<pre>Output:
+{1: 'Jan', 2: 'February', 3: 'March', 4: 'April', 5... }
+</pre>
+
+<pre>Sorting
+</pre>
+
+<pre class="prettyprint prettyprinted"><span class="pln">
+sortedkeys </span><span class="pun">=</span><span class="pln"> months</span><span class="pun">.</span><span class="pln">keys</span><span class="pun">()</span><span class="pln">
+</span><span class="kwd">print</span><span class="pln"> sortedkeys</span></pre>
+
+<pre>Output:
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+</pre>
+
+<pre>Dictionaries and Loops</pre>
+
+<pre>Iterating over keys
+</pre>
+
+<pre class="prettyprint prettyprinted"><span class="kwd">for</span><span class="pln"> key </span><span class="kwd">in</span><span class="pln"> months</span><span class="pun">:</span><span class="pln">
+    </span><span class="kwd">print</span><span class="pln"> key</span><span class="pun">,</span><span class="pln"> months</span><span class="pun">[</span><span class="pln">key</span><span class="pun">]</span></pre>
+
+<pre>Output:
+1 January
+2 February
+3 March
+4 April
+5 May
+6 June
+7 July
+8 August
+9 September
+10 October
+11 November
+12 December
+</pre>
+
+<pre>Iterating over (key, value) pairs
+</pre>
+
+<pre class="prettyprint prettyprinted"><span class="kwd">for</span><span class="pln"> key</span><span class="pun">,</span><span class="pln"> value </span><span class="kwd">in</span><span class="pln"> months</span><span class="pun">.</span><span class="pln">iteritems</span><span class="pun">():</span><span class="pln">
+    </span><span class="kwd">print</span><span class="pln"> key</span><span class="pun">,</span><span class="pln"> value
+
+</span><span class="kwd">print</span><span class="pln"> </span><span class="str">"The entries in the dictionary are:"</span><span class="pln">
+</span><span class="kwd">for</span><span class="pln"> item </span><span class="kwd">in</span><span class="pln"> months</span><span class="pun">.</span><span class="pln">keys</span><span class="pun">():</span><span class="pln">
+    </span><span class="kwd">print</span><span class="pln"> </span><span class="str">"months[ "</span><span class="pun">,</span><span class="pln"> item</span><span class="pun">,</span><span class="pln"> </span><span class="str">" ] = "</span><span class="pun">,</span><span class="pln"> months</span><span class="pun">[</span><span class="pln"> item </span><span class="pun">]</span></pre>
+
+<pre>Combining List and Dictionary
+
+Example of a list of dictionaries
+</pre>
+
+<pre class="prettyprint prettyprinted"><span class="pln">customers </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[{</span><span class="str">"uid"</span><span class="pun">:</span><span class="lit">1</span><span class="pun">,</span><span class="str">"name"</span><span class="pun">:</span><span class="str">"John"</span><span class="pun">},</span><span class="pln">
+    </span><span class="pun">{</span><span class="str">"uid"</span><span class="pun">:</span><span class="lit">2</span><span class="pun">,</span><span class="str">"name"</span><span class="pun">:</span><span class="str">"Smith"</span><span class="pun">},</span><span class="pln">
+           </span><span class="pun">{</span><span class="str">"uid"</span><span class="pun">:</span><span class="lit">3</span><span class="pun">,</span><span class="str">"name"</span><span class="pun">:</span><span class="str">"Andersson"</span><span class="pun">},</span><span class="pln">
+            </span><span class="pun">]</span><span class="pln">
+</span><span class="kwd">print</span><span class="pln"> customers</span></pre>
+
+<pre>Output:
+[{'uid': 1, 'name': 'John'}, {'uid': 2, 'name': 'Smith'}, {'uid': 3, 'name':
+'Andersson'}]
+</pre>
+
+<pre>Print the uid and name of each customer
+</pre>
+
+<pre class="prettyprint prettyprinted"><span class="kwd">for</span><span class="pln"> x </span><span class="kwd">in</span><span class="pln"> customer</span><span class="pun">:</span><span class="pln">
+    </span><span class="kwd">print</span><span class="pln"> x</span><span class="pun">[</span><span class="str">"uid"</span><span class="pun">],</span><span class="pln"> x</span><span class="pun">[</span><span class="str">"name"</span><span class="pun">]</span></pre>
+
+<pre>Output:
+1 John
+2 Smith
+3 Andersson
+</pre>
+
+<pre>Modify an entry
+
+This will change the name of customer 2 from Smith to Charlie
+</pre>
+
+<pre class="prettyprint prettyprinted"><span class="pln">customers</span><span class="pun">[</span><span class="lit">2</span><span class="pun">][</span><span class="str">"name"</span><span class="pun">]=</span><span class="str">"charlie"</span><span class="pln">
+</span><span class="kwd">print</span><span class="pln"> customers</span></pre>
+
+<pre>Output:
+[{'uid': 1, 'name': 'John'}, {'uid': 2, 'name': 'Smith'}, {'uid': 3, 'name':
+'charlie'}]
+</pre>
+
+<pre>Add a new field to each entry
+</pre>
+
+<pre class="prettyprint prettyprinted"><span class="kwd">for</span><span class="pln"> x </span><span class="kwd">in</span><span class="pln"> customers</span><span class="pun">:</span><span class="pln">
+    x</span><span class="pun">[</span><span class="str">"password"</span><span class="pun">]=</span><span class="str">"123456"</span><span class="pln"> </span><span class="com"># any initial value</span><span class="pln">
+
+</span><span class="kwd">print</span><span class="pln"> customers</span></pre>
+
+<pre>Output:
+[{'password': '123456', 'uid': 1, 'name': 'John'}, {'password': '123456', 'uid':
+2, 'name': 'Smith'}, {'password': '123456', 'uid': 3, 'name': 'Andersson'}]
+</pre>
+
+<pre>Delete a field
+</pre>
+
+<pre class="prettyprint prettyprinted"><span class="kwd">del</span><span class="pln"> customers</span><span class="pun">[</span><span class="lit">1</span><span class="pun">]</span><span class="pln">
+</span><span class="kwd">print</span><span class="pln"> customers</span></pre>
+
+<pre>Output:
+[{'uid': 1, 'name': 'John'}, {'uid': 3, 'name': 'Andersson'}]
+</pre>
+
+<pre>Delete all fields</pre>
+
+<pre class="prettyprint prettyprinted"><span class="com"># This will delete id field of each entry.</span><span class="pln">
+</span><span class="kwd">for</span><span class="pln"> x </span><span class="kwd">in</span><span class="pln"> customers</span><span class="pun">:</span><span class="pln">
+    </span><span class="kwd">del</span><span class="pln"> x</span><span class="pun">[</span><span class="str">"id"</span><span class="pun">]</span></pre>
+
+<pre>Output:
+[{'name': 'John'}, {'name': 'Smith'}, {'name': 'Andersson'}]
+</pre>
+
+<pre>For more information about Dictionary, please see <a href="http://www.pythonforbeginners.com/dictionary/" title="pythonforbeginners" target="_blank">this</a> article.
+</pre>
+
+                <div>
+                    <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" class="twitter-share-button twitter-share-button-rendered twitter-tweet-button" title="Twitter Tweet Button" src="./Dicts_files/tweet_button.781f4f0ed6951ea86890554cec78adec.en.html" style="position: static; visibility: visible; width: 76px; height: 28px;" data-url="http://www.pythonforbeginners.com/dictionary/dictionary-manipulation-in-python"></iframe>
+                    <div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 106px; height: 24px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 106px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 24px;" tabindex="0" vspace="0" width="100%" id="I0_1448415343135" name="I0_1448415343135" src="./Dicts_files/fastbutton.html" data-gapiattached="true" title="+1"></iframe></div>
+                    <div class="fb-like fb_iframe_widget" data-href="http://www.pythonforbeginners.com/dictionary/dictionary-manipulation-in-python" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=1474940332733250&amp;container_width=749&amp;href=http%3A%2F%2Fwww.pythonforbeginners.com%2Fdictionary%2Fdictionary-manipulation-in-python&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;share=true&amp;show_faces=true"><span style="vertical-align: bottom; width: 120px; height: 20px;"><iframe name="f3d45deffc" width="1000px" height="1000px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:like Facebook Social Plugin" src="./Dicts_files/like.html" style="border: none; visibility: visible; width: 120px; height: 20px;" class=""></iframe></span></div>                        
+                </div><br><br>
+
+<div style="text-align: center; padding: 8px;">
+<!--/*
+  *
+  * Revive Adserver Javascript Tag
+  * - Generated with Revive Adserver v3.1.0
+  *
+  */-->
+
+<!--/*
+  * The backup image section of this tag has been generated for use on a
+  * non-SSL page. If this tag is to be placed on an SSL page, change the
+  *   'http://ads.egrappler.com/www/delivery/...'
+  * to
+  *   'https://ads.egrappler.com/www/delivery/...'
+  *
+  * This noscript section of this tag only shows image banners. There
+  * is no width or height in these banners, so if you want these tags to
+  * allocate space for the ad before it shows, you will need to add this
+  * information to the <img> tag.
+  *
+  * If you do not want to deal with the intricities of the noscript
+  * section, delete the tag (from <noscript>... to </noscript>). On
+  * average, the noscript tag is called from less than 1% of internet
+  * users.
+  */-->
+
+<script type="text/javascript"><!--//<![CDATA[
+   var m3_u = (location.protocol=='https:'?'https://ads.egrappler.com/www/delivery/ajs.php':'http://ads.egrappler.com/www/delivery/ajs.php');
+   var m3_r = Math.floor(Math.random()*99999999999);
+   if (!document.MAX_used) document.MAX_used = ',';
+   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+   document.write ("?zoneid=67");
+   document.write ('&amp;cb=' + m3_r);
+   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+   document.write ("&amp;loc=" + escape(window.location));
+   if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+   if (document.context) document.write ("&context=" + escape(document.context));
+   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+   document.write ("'><\/scr"+"ipt>");
+//]]>--></script><script type="text/javascript" src="http://ads.egrappler.com/www/delivery/ajs.php?zoneid=67&cb=20943216210&charset=UTF-8&loc=http%3A//www.pythonforbeginners.com/dictionary/dictionary-manipulation-in-python&referer=http%3A//www.pythonforbeginners.com/dictionary/"></script><noscript>&lt;a href='http://ads.egrappler.com/www/delivery/ck.php?n=a66ef10b&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'&gt;&lt;img src='http://ads.egrappler.com/www/delivery/avw.php?zoneid=67&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;amp;n=a66ef10b' border='0' alt='' /&gt;&lt;/a&gt;</noscript>
+
+</div>
+
+                Read more about:
+                <ul class="nav nav-pills">
+                
+                <li><a href="http://www.pythonforbeginners.com/dictionary/" title="Dictionary"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Dictionary</a></li>
+                
+                </ul>
+            </div>
+        
+            <div id="disqus_thread"><iframe id="dsq-app1" name="dsq-app1" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Dicts_files/saved_resource.html" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 569px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+
+        </div>
+        
+<div class="col-md-5 col-lg-4">
+    <form role="form" id="search" method="get" action="http://www.pythonforbeginners.com/search/"> 
+      <div class="input-group">
+          <input type="text" placeholder="Search" id="q" name="q" class="form-control">
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-default">SEARCH</button>
+          </span>               
+      </div>
+    </form>
+    <aside>
+<div style="padding: 8px 8px;">
+
+
+<script type="text/javascript" src="http://cssdeck.com/assets/js/advert.js"></script>
+<script type="text/javascript">
+if (document.getElementById("tester") == undefined) 
+{ 
+document.write('<div class="adblock" style="padding: 5px;border: 1px solid #ddd;margin: 10px 5px;"><div style="padding-bottom: 10px;"><span style="font-weight: bold;font-size: 18px;">Essential Core Python Cheat Sheet</span><br> Free eBook in exchange for filling out a short form!</div><a href="http://egrappler.tradepub.com/free/w_dzon15/prgm.cgi?a=1"><img src="http://img.tradepub.com/free/w_dzon15/images/w_dzon15c8.jpg" style="width: 300px; height auto"></a></div>'); 
+}
+ 
+</script><div class="adblock" style="padding: 5px;border: 1px solid #ddd;margin: 10px 5px;"><div style="padding-bottom: 10px;"><span style="font-weight: bold;font-size: 18px;">Essential Core Python Cheat Sheet</span><br> Free eBook in exchange for filling out a short form!</div><a href="http://egrappler.tradepub.com/free/w_dzon15/prgm.cgi?a=1"><img src="./Dicts_files/w_dzon15c8.jpg" style="width: 300px; height auto"></a></div> 
+
+
+<!-- BuySellAds Ad Code -->
+<script type="text/javascript">
+(function(){
+  var bsa = document.createElement('script');
+     bsa.type = 'text/javascript';
+     bsa.async = true;
+     bsa.src = '//s3.buysellads.com/ac/bsa.js';
+  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+})();
+</script>
+<!-- End BuySellAds Ad Code -->
+<!-- BuySellAds Zone Code -->
+<div id="bsap_1303531" class="bsarocks bsap_d9686a1e7fd5c4eaea6cc68d37c9bce9"></div>
+<!-- End BuySellAds Zone Code -->
+</div>
+
+
+
+
+<!--/*
+  *
+  * Revive Adserver Javascript Tag
+  * - Generated with Revive Adserver v3.1.0
+  *
+  */-->
+
+<!--/*
+  * The backup image section of this tag has been generated for use on a
+  * non-SSL page. If this tag is to be placed on an SSL page, change the
+  *   'http://ads.egrappler.com/www/delivery/...'
+  * to
+  *   'https://ads.egrappler.com/www/delivery/...'
+  *
+  * This noscript section of this tag only shows image banners. There
+  * is no width or height in these banners, so if you want these tags to
+  * allocate space for the ad before it shows, you will need to add this
+  * information to the <img> tag.
+  *
+  * If you do not want to deal with the intricities of the noscript
+  * section, delete the tag (from <noscript>... to </noscript>). On
+  * average, the noscript tag is called from less than 1% of internet
+  * users.
+  */-->
+
+<script type="text/javascript"><!--//<![CDATA[
+   var m3_u = (location.protocol=='https:'?'https://ads.egrappler.com/www/delivery/ajs.php':'http://ads.egrappler.com/www/delivery/ajs.php');
+   var m3_r = Math.floor(Math.random()*99999999999);
+   if (!document.MAX_used) document.MAX_used = ',';
+   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+   document.write ("?zoneid=18");
+   document.write ('&amp;cb=' + m3_r);
+   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+   document.write ("&amp;loc=" + escape(window.location));
+   if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+   if (document.context) document.write ("&context=" + escape(document.context));
+   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+   document.write ("'><\/scr"+"ipt>");
+//]]>--></script><script type="text/javascript" src="http://ads.egrappler.com/www/delivery/ajs.php?zoneid=18&cb=99548185732&charset=UTF-8&loc=http%3A//www.pythonforbeginners.com/dictionary/dictionary-manipulation-in-python&referer=http%3A//www.pythonforbeginners.com/dictionary/"></script><noscript>&lt;a href='http://ads.egrappler.com/www/delivery/ck.php?n=a905b6c4&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'&gt;&lt;img src='http://ads.egrappler.com/www/delivery/avw.php?zoneid=18&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;amp;n=a905b6c4' border='0' alt='' /&gt;&lt;/a&gt;</noscript>
+
+
+
+
+
+
+       <div style="padding: 8px 0px;"><script type="text/javascript">
+<!--//<![CDATA[
+   document.MAX_ct0 ='';
+   var m3_u = (location.protocol=='https:'?'https://cas.criteo.com/delivery/ajs.php?':'http://cas.criteo.com/delivery/ajs.php?');
+   var m3_r = Math.floor(Math.random()*99999999999);
+   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+   document.write ("zoneid=254421");document.write("&amp;nodis=1");
+   document.write ('&amp;cb=' + m3_r);
+   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+   document.write ("&amp;loc=" + escape(window.location).substring(0,1600));
+   if (document.context) document.write ("&context=" + escape(document.context));
+   if ((typeof(document.MAX_ct0) != 'undefined') && (document.MAX_ct0.substring(0,4) == 'http')) {
+       document.write ("&amp;ct0=" + escape(document.MAX_ct0));
+   }
+   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
+   document.write ("'></scr"+"ipt>");
+//]]>--></script><script type="text/javascript" src="http://cas.criteo.com/delivery/ajs.php?zoneid=254421&nodis=1&cb=34816593909&charset=UTF-8&loc=http%3A//www.pythonforbeginners.com/dictionary/dictionary-manipulation-in-python"></script></div>
+          <a href="https://twitter.com/intent/follow?original_referer=http%3A%2F%2Fwww.pythonforbeginners.com%2F&region=follow_link&screen_name=pythonbeginners&tw_p=followbutton" class="btn btn-lg btn-success" data-show-count="false" data-size="large"><span class="fa fa-twitter on fa-square-o"></span> follow @pythonbeginners</a><br><br>
+        <div style="padding: 8px 0px;"><script type="text/javascript" src="http://ap.lijit.com/www/delivery/fpi.js?z=296859&u=theeighth&width=300&height=250"></script></div>
+
+        <div class="categories">
+          <h3>Categories</h3>
+          <ul class="nav nav-pills nav-stacked">
+              <li><a href="http://www.pythonforbeginners.com/basics/">Basics</a></li>
+              <li><a href="http://www.pythonforbeginners.com/cheatsheet/">Cheatsheet</a></li>
+              <li><a href="http://www.pythonforbeginners.com/code-snippets-source-code/">Code snippets</a></li>
+              <li><a href="http://www.pythonforbeginners.com/development/">Development</a></li>
+              <li><a href="http://www.pythonforbeginners.com/dictionary/">Dictionary</a></li>
+              <li><a href="http://www.pythonforbeginners.com/error-handling/">Error Handling</a></li>
+              <li><a href="http://www.pythonforbeginners.com/lists/">Lists</a></li>
+              <li><a href="http://www.pythonforbeginners.com/loops/">Loops</a></li>
+              <li><a href="http://www.pythonforbeginners.com/modules-in-python/">Modules</a></li>
+              <li><a href="http://www.pythonforbeginners.com/python-strings/">Strings</a></li>
+              <li><a href="http://www.pythonforbeginners.com/systems-programming/">System &amp; OS</a></li>
+              <li><a href="http://www.pythonforbeginners.com/uncategorized/">Uncategorized</a></li>
+              <li><a href="http://www.pythonforbeginners.com/python-on-the-web/">Web &amp; Internet</a></li>
+          </ul>
+        </div>
+<div style="padding: 8px 0px;"><script type="text/javascript" src="http://ap.lijit.com/www/delivery/fpi.js?z=296876&u=theeighth&width=160&height=600"></script></div>
+      <div class="textwidget"><script type="text/javascript" src="./Dicts_files/plusone.js" gapi_processed="true"></script>
+        <div id="___page_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 300px; height: 352px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 300px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 352px;" tabindex="0" vspace="0" width="100%" id="I1_1448415343212" name="I1_1448415343212" src="./Dicts_files/page.html" data-gapiattached="true" title="+Badge"></iframe></div>
+      </div>
+<script type="text/javascript" src="http://ap.lijit.com/www/delivery/fpi.js?z=296864&u=theeighth&width=300&height=250"></script>
+    </aside>
+</div>
+    </div> 
+
+
+            <div class="push"></div>
+        </div>
+       
+
+
+<div class="container container-footer">
+    <div id="footer">
+<script type="text/javascript" src="http://ap.lijit.com/www/delivery/fpi.js?z=296872&u=theeighth&width=728&height=90"></script><br>
+          © <a href="http://pythonforbeginners.com/" title="Perceptive Minds">Python For Beginners</a> 2012-2015  |  <a href="http://www.pythonforbeginners.com/privacy-policy/">Privacy Policy</a>
+    
+
+
+
+</div>
+</div>
+
+        <script src="./Dicts_files/jquery.min.js"></script>
+        <script src="./Dicts_files/bootstrap.min.js"></script>
+        
+
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=1474940332733250";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+        
+ <script type="text/javascript">
+/* <![CDATA[ */
+    var disqus_url = 'http://www.pythonforbeginners.com/dictionary/dictionary-manipulation-in-python';    
+    // var disqus_identifier = '5000 http://www.pythonforbeginners.com/?p=5000';
+    var disqus_container_id = 'disqus_thread';
+    var disqus_domain = 'disqus.com';
+    var disqus_shortname = 'pythonbeginners';
+    var disqus_title = "Dictionary Manipulation in Python";
+        var disqus_config = function () {
+        var config = this; // Access to the config object
+        config.language = '';
+
+        /*
+           All currently supported events:
+            * preData — fires just before we request for initial data
+            * preInit - fires after we get initial data but before we load any dependencies
+            * onInit  - fires when all dependencies are resolved but before dtpl template is rendered
+            * afterRender - fires when template is rendered but before we show it
+            * onReady - everything is done
+         */
+
+        config.callbacks.preData.push(function() {
+            // clear out the container (its filled for SEO/legacy purposes)
+            document.getElementById(disqus_container_id).innerHTML = '';
+        });
+                config.callbacks.onReady.push(function() {
+            // sync comments in the background so we don't block the page
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = '?cf_action=sync_comments&post_id=5000';
+
+            var firstScript = document.getElementsByTagName( "script" )[0];
+            firstScript.parentNode.insertBefore(script, firstScript);
+        });
+                    };
+/* ]]> */
+</script>
+
+
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.' + 'disqus.com' + '/embed.js?pname=wordpress&pver=2.74';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+/* ]]> */
+</script>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+    
+
+<iframe name="oauth2relay2089200232" id="oauth2relay2089200232" src="./Dicts_files/postmessageRelay.html" tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe></body></html>
